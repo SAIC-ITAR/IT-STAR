@@ -28,7 +28,8 @@ public class TestController : MonoBehaviour
 	public AudioClip pass;
 	public AudioClip fail; 
 	public AudioClip fireworks; 
-	private bool allcorrect = true; 
+	public bool allcorrect = true; // checks whether all of the rpelacement steps were ordered crrectly.  This is set to true by default and to false if the steps are not ordered correctly
+	//the score holder variables get the score for that part at the end of the test and store it.  scoreholder is the temporary storage during the test
 	public int scoreHolder = -1;
 	public int hdScore = -1;
 	public int cdScore = -1;
@@ -36,13 +37,16 @@ public class TestController : MonoBehaviour
 	public int batteryScore = -1;
 	public int wifiScore = -1;
 	public int fanScore = -1;
-	public TouchController touchController;
-	public bool moved;
-	public bool wrongFlag;
-	public bool correctFlag;
+
+	public TouchController touchController; 
+	public bool moved; // checks whether a step has been moved in the replacement part of the test
+	public bool wrongFlag;//checks whether the sound for getting the repair steps incorrect has been played, keeps it from playing multiple times
+	public bool correctFlag; //checks whether the sound for getting the repair steps correct has been played, keeps it from playing multiple times
+
 
 
 	void Awake () {
+		//sets all of the scroesto -1, which the sets the material to blue in undim() and dim()
 		for (int i = 0; i < scores.Length; i++) {
 			scores [i] = -1;
 		}
@@ -53,7 +57,7 @@ public class TestController : MonoBehaviour
 	public void TestOn (int UIMenuON) {//pass touchController.menuOn, called from UIController
 		modelNum = UIMenuON;//reset the testing variables
 		scores [modelNum] = 0;
-		qNumber = 0;
+		qNumber = 0; 
 
 		repairAnswer = new string[StringPool.RFacts [modelNum].Length];//Initialize repairAnswers with the correct repair steps 
 		for (int i = 0; i < StringPool.RFacts [modelNum].Length; i++) {

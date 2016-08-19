@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIController : MonoBehaviour {
 
 	public GameObject smallMenuOcc;
+	public GameObject aboutRepairOcc;
 	public GameObject largeMenuOcc;
 	public GameObject congrats;
 	public GameObject close;
@@ -92,6 +93,7 @@ public class UIController : MonoBehaviour {
 		testController.undim ();
 		touchController.menuOn = 0;
 		smallMenuOcc.SetActive (false);
+		aboutRepairOcc.SetActive (false);
 
 		particlesystem.Play ();
 		particlesystem1.Play ();
@@ -141,6 +143,9 @@ public class UIController : MonoBehaviour {
 	}
 		
 	public void AboutOn(){
+		aboutRepairOcc.SetActive (true);
+		smallMenuOcc.SetActive (false);
+
 		if (touchController.menuOn != 0){
 			anim1.SetBool ("panelSmall", true);
 
@@ -160,6 +165,8 @@ public class UIController : MonoBehaviour {
 
 	//tutorial instructions
 	public void RepairOn(){
+		aboutRepairOcc.SetActive (true);
+		smallMenuOcc.SetActive (false);
 		if (touchController.menuOn != 0){
 			anim1.SetBool ("panelSmall", true);
 		repairCounter = 1;
@@ -228,8 +235,9 @@ public class UIController : MonoBehaviour {
 
 
 	public void TestOn () {
+		aboutRepairOcc.SetActive (true);
 		testController.scoreHolder = 0;
-
+		testController.allcorrect = true;
 		if (touchController.menuOn != 0){
 		soundPlayer.clip = abouton;
 		soundPlayer.Play ();
@@ -241,6 +249,8 @@ public class UIController : MonoBehaviour {
 	}
 
 	public void Back(){
+		aboutRepairOcc.SetActive (false);
+
 		testController.wrongFlag = false;
 		testController.correctFlag = false;
 		if (fireworksBool == true) {
@@ -274,6 +284,7 @@ public class UIController : MonoBehaviour {
 			
 			touchController.menuOn = 0;
 			smallMenuOcc.SetActive (false);
+			aboutRepairOcc.SetActive (false);
 
 		} else {
 			touchController.FirstMenu = true;
@@ -396,7 +407,7 @@ public class UIController : MonoBehaviour {
 	public void trackingVisualsOn (bool b) {
 		
 		if ((b == false) || (Input.GetKeyDown("j"))) {
-			ARCamera.transform.position = new Vector3 (-3230, -530, 560);
+			ARCamera.transform.position = new Vector3 (-3220, -576, 520);
 			ARCamera.transform.LookAt (marker.transform);
 			//47, 180, 5
 			hdRaycast.enabled = true;

@@ -3,11 +3,16 @@ using System.Collections;
 
 public class Counter : MonoBehaviour
 {
+	public Renderer frameSkip;
+
 	public int waitTime;
 	// Use this for initialization
 	void Start ()
 	{
-		waitTime = 200;
+		waitTime = 50;
+		if (Application.loadedLevel == 0) {
+			waitTime += 150;
+		}
 	}
 	
 	// Update is called once per frame
@@ -29,7 +34,7 @@ public class Counter : MonoBehaviour
 
 				if (hit.rigidbody.gameObject.name == "SkipFrame") {
 					waitTime = -1;
-
+					//frameSkip.enabled = true;
 				}
 			}
 		}
